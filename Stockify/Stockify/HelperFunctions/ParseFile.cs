@@ -9,6 +9,32 @@ namespace Stockify.HelperFunctions
 {
     public class ParseFile
     {
+        public List<string[]> parseCSV(string path)
+        {
+            List<string[]> parsedData = new List<string[]>();
+
+            try
+            {
+                using (StreamReader readFile = new StreamReader(path))
+                {
+                    string line;
+                    string[] row;
+
+                    while ((line = readFile.ReadLine()) != null)
+                    {
+                        row = line.Split(',');
+                        parsedData.Add(row);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+
+            return parsedData;
+        }
+        /*
         public IEnumerable<Company> parseCSV(string input)
         {
             
@@ -30,6 +56,6 @@ namespace Stockify.HelperFunctions
                         Convert.ToDecimal(data[4]), Convert.ToDouble(data[5]),
                         Convert.ToDecimal(data[6]));
                 });
-            }
+         }*/
     }
 }
