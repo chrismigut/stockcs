@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label1 = new System.Windows.Forms.Label();
             this.gbSearch = new System.Windows.Forms.GroupBox();
             this.btnSubmit = new System.Windows.Forms.Button();
@@ -94,6 +94,7 @@
             this.btnSubmit.TabIndex = 7;
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Visible = false;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // btnClear
             // 
@@ -104,6 +105,7 @@
             this.btnClear.TabIndex = 6;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // gbLoadMethod
             // 
@@ -128,6 +130,7 @@
             this.rbDisplay.TabIndex = 1;
             this.rbDisplay.Text = "Display";
             this.rbDisplay.UseVisualStyleBackColor = true;
+            this.rbDisplay.CheckedChanged += new System.EventHandler(this.rbDisplay_CheckedChanged);
             // 
             // rbOnline
             // 
@@ -139,6 +142,7 @@
             this.rbOnline.TabIndex = 0;
             this.rbOnline.Text = "Download";
             this.rbOnline.UseVisualStyleBackColor = true;
+            this.rbOnline.CheckedChanged += new System.EventHandler(this.rbOnline_CheckedChanged);
             // 
             // gbResolution
             // 
@@ -164,6 +168,7 @@
             this.rbMonthly.TabIndex = 2;
             this.rbMonthly.Text = "Monthly";
             this.rbMonthly.UseVisualStyleBackColor = true;
+            this.rbMonthly.CheckedChanged += new System.EventHandler(this.rbMonthly_CheckedChanged);
             // 
             // rbWeekly
             // 
@@ -175,6 +180,7 @@
             this.rbWeekly.TabIndex = 1;
             this.rbWeekly.Text = "Weekly";
             this.rbWeekly.UseVisualStyleBackColor = true;
+            this.rbWeekly.CheckedChanged += new System.EventHandler(this.rbWeekly_CheckedChanged);
             // 
             // rbDaily
             // 
@@ -186,6 +192,7 @@
             this.rbDaily.TabIndex = 0;
             this.rbDaily.Text = "Daily";
             this.rbDaily.UseVisualStyleBackColor = true;
+            this.rbDaily.CheckedChanged += new System.EventHandler(this.rbDaily_CheckedChanged);
             // 
             // gbDatePicker
             // 
@@ -214,6 +221,7 @@
             this.dtpEndDate.Size = new System.Drawing.Size(160, 22);
             this.dtpEndDate.TabIndex = 3;
             this.dtpEndDate.Value = new System.DateTime(2015, 3, 3, 0, 0, 0, 0);
+            this.dtpEndDate.ValueChanged += new System.EventHandler(this.dtpEndDate_ValueChanged);
             // 
             // dtpStartDate
             // 
@@ -227,6 +235,7 @@
             this.dtpStartDate.Size = new System.Drawing.Size(160, 22);
             this.dtpStartDate.TabIndex = 2;
             this.dtpStartDate.Value = new System.DateTime(1990, 1, 1, 0, 0, 0, 0);
+            this.dtpStartDate.ValueChanged += new System.EventHandler(this.dtpStartDate_ValueChanged);
             // 
             // lblEndDate
             // 
@@ -284,16 +293,16 @@
             // 
             // chCandleStick
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chCandleStick.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chCandleStick.Legends.Add(legend1);
+            chartArea6.Name = "ChartArea1";
+            this.chCandleStick.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chCandleStick.Legends.Add(legend6);
             this.chCandleStick.Location = new System.Drawing.Point(18, 273);
             this.chCandleStick.Name = "chCandleStick";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chCandleStick.Series.Add(series1);
+            series6.ChartArea = "ChartArea1";
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chCandleStick.Series.Add(series6);
             this.chCandleStick.Size = new System.Drawing.Size(854, 392);
             this.chCandleStick.TabIndex = 5;
             this.chCandleStick.Text = "Chart";

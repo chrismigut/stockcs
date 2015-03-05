@@ -9,6 +9,7 @@ namespace Stockify.HelperFunctions
 {
     public class ParseFile
     {
+        /*
         public List<string[]> parseCSV(string path)
         {
             List<string[]> parsedData = new List<string[]>();
@@ -34,7 +35,7 @@ namespace Stockify.HelperFunctions
 
             return parsedData;
         }
-        /*
+        */
         public IEnumerable<Company> parseCSV(string input)
         {
             
@@ -56,6 +57,6 @@ namespace Stockify.HelperFunctions
                         Convert.ToDecimal(data[4]), Convert.ToDouble(data[5]),
                         Convert.ToDecimal(data[6]));
                 });
-         }*/
+         }
     }
 }

@@ -26,7 +26,7 @@ namespace Stockify
         {
             InitializeComponent();
             DateTime dtEndDate = DateTime.Today.AddDays(-1);
-            dtpEndDate.Value = dtEndDate;
+            //dtpEndDate.MaxDate = dtEndDate;
             //init the dates
             Query.startDay = dtpStartDate.Value.Day.ToString();
             Query.startMonth = dtpStartDate.Value.Day.ToString();
@@ -44,11 +44,11 @@ namespace Stockify
         {
             try
             {
-                 //Start Date
-                 //User has selected a starting date
-                 Query.startDay = dtpStartDate.Value.Day.ToString();
-                 Query.startMonth = dtpStartDate.Value.Month.ToString();
-                 Query.startYear = dtpStartDate.Value.Year.ToString();
+                //Start Date
+                //User has selected a starting date
+                Query.startDay = dtpStartDate.Value.Day.ToString();
+                Query.startMonth = dtpStartDate.Value.Month.ToString();
+                Query.startYear = dtpStartDate.Value.Year.ToString();
             }
             catch
             {
@@ -73,7 +73,7 @@ namespace Stockify
             {
                 MessageBox.Show("Error: dtpEndDate_ValueChanged method");
             }
-       }
+        }
 
         /// <summary>
         /// Resolution -> User Picked Daily
@@ -90,7 +90,7 @@ namespace Stockify
                     fileLocation = "Daily";
                 }
             }
-            catch 
+            catch
             {
                 MessageBox.Show("Error: rbDaily_CheckedChanged");
             }
@@ -183,6 +183,7 @@ namespace Stockify
         /// <summary>
         /// Clear input fields of the form
         /// </summary>
+        ///         
         private void btnClear_Click(object sender, EventArgs e)
         {
             //Clear the fields of the form
@@ -208,7 +209,7 @@ namespace Stockify
             Query.isWeekly = false;
 
             Query.companyName = "";
-           
+
             //Hide submit button
             btnSubmit.Visible = false;
         }
@@ -225,7 +226,7 @@ namespace Stockify
                 int checkMonth = int.Parse(Query.endMonth) - int.Parse(Query.startMonth);
                 int checkYear = int.Parse(Query.endYear) - int.Parse(Query.startYear);
 
-                if ((checkDay >= 0) && (checkMonth >= 0) && (checkYear >= 0) )
+                if ((checkDay >= 0) && (checkMonth >= 0) && (checkYear >= 0))
                 {
                     //If date is valid, then continue
                     string filePath;
@@ -236,16 +237,13 @@ namespace Stockify
                     {
                         //Assemble the search query - Online
                         QueryAssembly.buildStockQuery(Query);
-                        
+
                         //Read saved file
                         filePath = QueryFile.readFromFile(fileLocation, Query.companyName);
 
                         //read saved file
                         var readCSV = (inputFile.parseCSV(filePath)).ToString();
                         MessageBox.Show(readCSV);
-                        
-                        
-                        
                     }
                 }
                 else
@@ -253,9 +251,9 @@ namespace Stockify
                     MessageBox.Show("Error: Sorry the end date select is before the selected start date");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error: btnSubmit_Click: "+ ex.Message);
+                MessageBox.Show("Error: btnSubmit_Click: " + ex.Message);
             }
         }
     }
