@@ -238,6 +238,11 @@ namespace Stockify
 
                     if (rbOnline.Checked == true)
                     {
+                        // build grid
+                        lsvStock.View = View.Details;
+                        lsvStock.GridLines = true;
+                        lsvStock.Sorting = SortOrder.Ascending;
+
                         //Assemble the search query - Online
                         QueryAssembly.buildStockQuery(Query);
 
@@ -253,19 +258,16 @@ namespace Stockify
 
                         // add elements to list view items
                         List<ListViewItem> items = new List<ListViewItem>();
+                        lsvStock.BeginUpdate();
                         foreach (string line in lines)
                         {
                             string[] stuff = line.Split(',');
                             ListViewItem element = new ListViewItem(stuff[0]);
                             element.SubItems.Add(stuff[0]);
-
-                            // add list view items to list view
+                            //RefreshListViewItem(element, line);
                             lsvStock.Items.Add(element);
                         }
-                        // build grid
-                        lsvStock.View = View.Details;
-                        lsvStock.GridLines = true;
-                        lsvStock.Sorting = SortOrder.Ascending;
+                        lsvStock.EndUpdate();
                     }
                     else if (rbDisplay.Checked == true)
                     {
