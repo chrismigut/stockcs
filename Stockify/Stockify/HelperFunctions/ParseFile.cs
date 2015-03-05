@@ -36,6 +36,7 @@ namespace Stockify.HelperFunctions
             return parsedData;
         }
         */
+        /*
         public IEnumerable<Company> parseCSV(string input)
         {
             
@@ -58,5 +59,6 @@ namespace Stockify.HelperFunctions
                         Convert.ToDecimal(data[6]));
                 });
          }
+        */
     }
 }

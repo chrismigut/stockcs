@@ -212,6 +212,9 @@ namespace Stockify
 
             //Hide submit button
             btnSubmit.Visible = false;
+
+            // clear list view
+            lsvStock.Items.Clear();
         }
 
         /// <summary>
@@ -241,9 +244,36 @@ namespace Stockify
                         //Read saved file
                         filePath = QueryFile.readFromFile(fileLocation, Query.companyName);
 
-                        //read saved file
-                        var readCSV = (inputFile.parseCSV(filePath)).ToString();
-                        MessageBox.Show(readCSV);
+                        // read from saved file
+                        string[] lines = File.ReadAllLines(filePath);
+                        string removeHeader = "Date,Open,High,Low,Close,Volume,Adj Close";
+                        string removeWhiteSpace = "";
+                        lines = lines.Where(val => val != removeHeader).ToArray();
+                        lines = lines.Where(val => val != removeWhiteSpace).ToArray();
+
+                        // add elements to list view items
+                        List<ListViewItem> items = new List<ListViewItem>();
+                        foreach (string line in lines)
+                        {
+                            string[] stuff = line.Split(',');
+                            ListViewItem element = new ListViewItem(stuff[0]);
+                            element.SubItems.Add(stuff[0]);
+
+                            // add list view items to list view
+                            lsvStock.Items.Add(element);
+                        }
+                        // build grid
+                        lsvStock.View = View.Details;
+                        lsvStock.GridLines = true;
+                        lsvStock.Sorting = SortOrder.Ascending;
+                    }
+                    else if (rbDisplay.Checked == true)
+                    {
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error: nothing was selected! -- should never reach here");
                     }
                 }
                 else
