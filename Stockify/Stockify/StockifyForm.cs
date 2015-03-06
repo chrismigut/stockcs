@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using Stockify.HelperClasses;
 using Stockify.HelperFunctions;
 using System.IO;
+using System.Windows.Forms.DataVisualization.Charting;
 namespace Stockify
 {
     public partial class StockifyForm : Form
@@ -233,6 +234,7 @@ namespace Stockify
         {
             try
             {
+                // errors with dates are coming from here (i believe) dates acting buggy
                 //check for end date is not less than start date
                 int checkDay = int.Parse(Query.endDay) - int.Parse(Query.startDay);
                 int checkMonth = int.Parse(Query.endMonth) - int.Parse(Query.startMonth);
@@ -253,41 +255,11 @@ namespace Stockify
                         //Read saved file
                         filePath = QueryFile.readFromFile(fileLocation, Query.companyName);
 
-                        // read from saved file
-                        string[] lines = File.ReadAllLines(filePath);
-                        string removeHeader = "Date,Open,High,Low,Close,Volume,Adj Close";
-                        string removeWhiteSpace = "";
-                        lines = lines.Where(val => val != removeHeader).ToArray();
-                        lines = lines.Where(val => val != removeWhiteSpace).ToArray();
-
-                        // add elements to list view items
-                        List<ListViewItem> items = new List<ListViewItem>();
-
-                        // read somewhere that this helps with speed
-                        lsvStock.BeginUpdate();
-
-                        // read each line in from filePath
-                        foreach (string line in lines)
-                        {
-                            string[] data = line.Split(',');
-
-                            // add each element as a list view item (subitem)
-                            ListViewItem element = new ListViewItem(data[0]);
-                            element.SubItems.Add(data[1]);
-                            element.SubItems.Add(data[2]);
-                            element.SubItems.Add(data[3]);
-                            element.SubItems.Add(data[4]);
-                            element.SubItems.Add(data[5]);
-                            element.SubItems.Add(data[6]);
-
-                            // add list view items to list view (lsvStock)
-                            lsvStock.Items.Add(element);
-                        }
-                        // stop updating list view
-                        lsvStock.EndUpdate();
+                        // load data to list view
+                        loadDataToListView(filePath);
 
                         // do stuff with chart
-
+                        loadDataToChart(filePath);
                     }
                     else if (rbDisplay.Checked == true)
                     {
@@ -307,6 +279,103 @@ namespace Stockify
             {
                 MessageBox.Show("Error: btnSubmit_Click: " + ex.Message);
             }
+        }
+        /// <summary>
+        /// Load data from csv file path to list view (performs reading from csv file here).
+        /// </summary>
+        public void loadDataToListView(string filePath)
+        {
+            // read from saved file
+            string[] lines = File.ReadAllLines(filePath);
+            string removeHeader = "Date,Open,High,Low,Close,Volume,Adj Close";
+            string removeWhiteSpace = "";
+            lines = lines.Where(val => val != removeHeader).ToArray();
+            lines = lines.Where(val => val != removeWhiteSpace).ToArray();
+
+            // add elements to list view items
+            List<ListViewItem> items = new List<ListViewItem>();
+
+            // read somewhere that this helps with speed
+            lsvStock.BeginUpdate();
+
+            // read each line in from filePath
+            foreach (string line in lines)
+            {
+                string[] data = line.Split(',');
+
+                // add each element as a list view item (subitem)
+                ListViewItem element = new ListViewItem(data[0]);
+                element.SubItems.Add(data[1]);
+                element.SubItems.Add(data[2]);
+                element.SubItems.Add(data[3]);
+                element.SubItems.Add(data[4]);
+                element.SubItems.Add(data[5]);
+                element.SubItems.Add(data[6]);
+
+                // add list view items to list view (lsvStock)
+                lsvStock.Items.Add(element);
+            }
+            // stop updating list view
+            lsvStock.EndUpdate();
+        }
+        /// <summary>
+        /// Load data from csv file path to Candlestick Chart (performs reading from csv file here).
+        /// </summary>
+        public void loadDataToChart(string filePath)
+        {
+            // read from saved file
+            string[] lines = File.ReadAllLines(filePath);
+            string removeHeader = "Date,Open,High,Low,Close,Volume,Adj Close";
+            string removeWhiteSpace = "";
+            lines = lines.Where(val => val != removeHeader).ToArray();
+            lines = lines.Where(val => val != removeWhiteSpace).ToArray();
+
+            List<string> stockData = new List<string>();
+
+            // read each line in from filePath
+            foreach (string line in lines)
+            {
+                string[] data = line.Split(',');
+                stockData.Add(data[0]);
+                stockData.Add(data[1]);
+                stockData.Add(data[2]);
+                stockData.Add(data[3]);
+                stockData.Add(data[4]);
+                stockData.Add(data[5]);
+                stockData.Add(data[6]);
+            }
+
+            // initialize series for Candlestick
+            Series price = new Series("Price");
+            chCandleStick.Series.Add(price);
+
+            // Set series chart type
+            chCandleStick.Series["Price"].ChartType = SeriesChartType.Candlestick;
+
+            // Set the style of the open-close marks
+            chCandleStick.Series["Price"]["OpenCloseStyle"] = "Triangle";
+
+            // Show both open and close marks
+            chCandleStick.Series["Price"]["ShowOpenClose"] = "Both";
+
+            // Set point width
+            chCandleStick.Series["Price"]["PointWidth"] = "1.0";
+
+            // Set colors bars
+            chCandleStick.Series["Price"]["PriceUpColor"] = "Green";
+            chCandleStick.Series["Price"]["PriceDownColor"] = "Red";
+
+            // do something with data
+        }
+
+        /// <summary>
+        /// Button to save chart based on time of button press
+        /// </summary>
+        private void btSaveImageOfChart_Click(object sender, EventArgs e)
+        {
+            // save png file to DEV folder
+            // weird error with .net jit ??
+            chCandleStick.SaveImage("C:\\DEV\\chart_" + DateTime.Now + ".png", ChartImageFormat.Png);
         }
     }
 }
