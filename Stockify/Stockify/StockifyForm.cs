@@ -11,30 +11,40 @@ using Stockify.HelperFunctions;
 using System.IO;
 namespace Stockify
 {
-    public partial class Form1 : Form
+    public partial class StockifyForm : Form
     {
         SearchQuery Query = new SearchQuery();
         Queries Yahoo_Call = new Queries();
         CustomFileHander QueryFile = new CustomFileHander();
         QueryAssembly QueryAssembly = new QueryAssembly();
-        ParseFile inputFile = new ParseFile();
 
         string fileLocation = "";
         string loadMethod = "";
 
-        public Form1()
+        public StockifyForm()
         {
             InitializeComponent();
             DateTime dtEndDate = DateTime.Today.AddDays(-1);
-            //dtpEndDate.MaxDate = dtEndDate;
             //init the dates
             Query.startDay = dtpStartDate.Value.Day.ToString();
-            Query.startMonth = dtpStartDate.Value.Day.ToString();
-            Query.startYear = dtpStartDate.Value.Day.ToString();
+            Query.startMonth = dtpStartDate.Value.Month.ToString();
+            Query.startYear = dtpStartDate.Value.Year.ToString();
 
             Query.endDay = dtpEndDate.Value.Day.ToString();
             Query.endMonth = dtpEndDate.Value.Month.ToString();
             Query.endYear = dtpEndDate.Value.Year.ToString();
+
+            // build grid
+            lsvStock.View = View.Details;
+            lsvStock.GridLines = true;
+            lsvStock.Sorting = SortOrder.Descending;
+            lsvStock.Columns.Add("Date");
+            lsvStock.Columns.Add("Open");
+            lsvStock.Columns.Add("High");
+            lsvStock.Columns.Add("Low");
+            lsvStock.Columns.Add("Close");
+            lsvStock.Columns.Add("Volume");
+            lsvStock.Columns.Add("Adj Close");
         }
 
         /// <summary>
@@ -124,7 +134,7 @@ namespace Stockify
         {
             try
             {
-                if (rbWeekly.Checked == true)
+                if (rbMonthly.Checked == true)
                 {
                     Query.isDaily = false;
                     Query.isWeekly = false;
@@ -183,7 +193,6 @@ namespace Stockify
         /// <summary>
         /// Clear input fields of the form
         /// </summary>
-        ///         
         private void btnClear_Click(object sender, EventArgs e)
         {
             //Clear the fields of the form
@@ -232,16 +241,11 @@ namespace Stockify
                 if ((checkDay >= 0) && (checkMonth >= 0) && (checkYear >= 0))
                 {
                     //If date is valid, then continue
-                    string filePath;
-                    string currentLine = "";
+                    string filePath = "";
                     Query.companyName = txtCompanyTicker.Text.Trim();
 
                     if (rbOnline.Checked == true)
                     {
-                        // build grid
-                        lsvStock.View = View.Details;
-                        lsvStock.GridLines = true;
-                        lsvStock.Sorting = SortOrder.Ascending;
 
                         //Assemble the search query - Online
                         QueryAssembly.buildStockQuery(Query);
@@ -258,20 +262,36 @@ namespace Stockify
 
                         // add elements to list view items
                         List<ListViewItem> items = new List<ListViewItem>();
+
+                        // read somewhere that this helps with speed
                         lsvStock.BeginUpdate();
+
+                        // read each line in from filePath
                         foreach (string line in lines)
                         {
-                            string[] stuff = line.Split(',');
-                            ListViewItem element = new ListViewItem(stuff[0]);
-                            element.SubItems.Add(stuff[0]);
-                            //RefreshListViewItem(element, line);
+                            string[] data = line.Split(',');
+
+                            // add each element as a list view item (subitem)
+                            ListViewItem element = new ListViewItem(data[0]);
+                            element.SubItems.Add(data[1]);
+                            element.SubItems.Add(data[2]);
+                            element.SubItems.Add(data[3]);
+                            element.SubItems.Add(data[4]);
+                            element.SubItems.Add(data[5]);
+                            element.SubItems.Add(data[6]);
+
+                            // add list view items to list view (lsvStock)
                             lsvStock.Items.Add(element);
                         }
+                        // stop updating list view
                         lsvStock.EndUpdate();
+
+                        // do stuff with chart
+
                     }
                     else if (rbDisplay.Checked == true)
                     {
-
+                        // not sure what display does!
                     }
                     else
                     {

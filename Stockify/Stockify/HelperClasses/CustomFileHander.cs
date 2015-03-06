@@ -32,19 +32,19 @@ namespace Stockify.HelperClasses
                 switch (storeLocation)
                 {
                     case "Daily":
-                        using (StreamWriter w = File.AppendText("C:\\DEV\\STOCKDATA\\Daily\\"+companyTicker+".csv"))
+                        using (StreamWriter w = File.CreateText("C:\\DEV\\STOCKDATA\\Daily\\" + companyTicker + ".csv"))
                         {
                             w.WriteLine(queryResult);
                         }
                         break;
                     case "Weekly":
-                        using (StreamWriter w = File.AppendText("C:\\DEV\\STOCKDATA\\Weekly\\" + companyTicker + ".csv"))
+                        using (StreamWriter w = File.CreateText("C:\\DEV\\STOCKDATA\\Weekly\\" + companyTicker + ".csv"))
                         {
                             w.WriteLine(queryResult);
                         }
                         break;
                     case "Monthly":
-                        using (StreamWriter w = File.AppendText("C:\\DEV\\STOCKDATA\\Monthly\\" + companyTicker + ".csv"))
+                        using (StreamWriter w = File.CreateText("C:\\DEV\\STOCKDATA\\Monthly\\" + companyTicker + ".csv"))
                         {
                             w.WriteLine(queryResult);
                         }
@@ -75,23 +75,11 @@ namespace Stockify.HelperClasses
                 switch (fileLocation)
                 {
                     case "Daily":
-                        //using (StreamReader r = File.OpenText("C:\\DEV\\STOCKDATA\\Daily\\Daily.csv"))
-                        //{
-                        //    return r.ToString();
-                        //}
                         return "C:\\DEV\\STOCKDATA\\Daily\\" + companyTicker + ".csv";
                     case "Weekly":
-                        //using (StreamReader r = File.OpenText("C:\\DEV\\STOCKDATA\\Daily\\Weekly.csv"))
-                        //{
-                        //    return r.ToString();
-                        //}
-                        return "C:\\DEV\\STOCKDATA\\Daily\\" + companyTicker + ".csv";
+                        return "C:\\DEV\\STOCKDATA\\Weekly\\" + companyTicker + ".csv";
                     case "Monthly":
-                        //using (StreamReader r = File.OpenText("C:\\DEV\\STOCKDATA\\Daily\\Monthly.csv"))
-                        //{
-                        //    return r.ToString();
-                        //}
-                        return "C:\\DEV\\STOCKDATA\\Daily\\" + companyTicker + ".csv";
+                        return "C:\\DEV\\STOCKDATA\\Monthly\\" + companyTicker + ".csv";
                     default:
                         MessageBox.Show("ERROR: Could not read file.\n\tFile location selected: " + fileLocation);
                         return "ERROR";

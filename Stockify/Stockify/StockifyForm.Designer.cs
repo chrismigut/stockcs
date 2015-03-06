@@ -1,6 +1,6 @@
 ﻿namespace Stockify
 {
-    partial class Form1
+    partial class StockifyForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            this.label1 = new System.Windows.Forms.Label();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.gbSearch = new System.Windows.Forms.GroupBox();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -60,14 +59,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.chCandleStick)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 37);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 17);
-            this.label1.TabIndex = 0;
-            // 
             // gbSearch
             // 
             this.gbSearch.Controls.Add(this.btnSubmit);
@@ -76,12 +67,12 @@
             this.gbSearch.Controls.Add(this.gbResolution);
             this.gbSearch.Controls.Add(this.gbDatePicker);
             this.gbSearch.Controls.Add(this.panel1);
-            this.gbSearch.Location = new System.Drawing.Point(12, 5);
+            this.gbSearch.Location = new System.Drawing.Point(12, 11);
             this.gbSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbSearch.Name = "gbSearch";
             this.gbSearch.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbSearch.Size = new System.Drawing.Size(351, 263);
-            this.gbSearch.TabIndex = 2;
+            this.gbSearch.TabIndex = 3;
             this.gbSearch.TabStop = false;
             this.gbSearch.Text = "Search";
             // 
@@ -216,7 +207,7 @@
             this.dtpEndDate.Location = new System.Drawing.Point(91, 54);
             this.dtpEndDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpEndDate.MaxDate = new System.DateTime(2015, 3, 3, 0, 0, 0, 0);
-            this.dtpEndDate.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.dtpEndDate.MinDate = new System.DateTime(1990, 1, 2, 0, 0, 0, 0);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(160, 22);
             this.dtpEndDate.TabIndex = 3;
@@ -229,8 +220,8 @@
             this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpStartDate.Location = new System.Drawing.Point(91, 22);
             this.dtpStartDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dtpStartDate.MaxDate = new System.DateTime(2015, 3, 3, 0, 0, 0, 0);
-            this.dtpStartDate.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.dtpStartDate.MaxDate = new System.DateTime(2015, 3, 2, 0, 0, 0, 0);
+            this.dtpStartDate.MinDate = new System.DateTime(1990, 1, 1, 0, 0, 0, 0);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(160, 22);
             this.dtpStartDate.TabIndex = 2;
@@ -284,40 +275,39 @@
             // 
             // lsvStock
             // 
-            this.lsvStock.Location = new System.Drawing.Point(375, 11);
+            this.lsvStock.Location = new System.Drawing.Point(382, 11);
             this.lsvStock.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lsvStock.Name = "lsvStock";
-            this.lsvStock.Size = new System.Drawing.Size(497, 252);
-            this.lsvStock.TabIndex = 4;
+            this.lsvStock.Size = new System.Drawing.Size(507, 263);
+            this.lsvStock.TabIndex = 5;
             this.lsvStock.UseCompatibleStateImageBehavior = false;
             // 
             // chCandleStick
             // 
-            chartArea6.Name = "ChartArea1";
-            this.chCandleStick.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chCandleStick.Legends.Add(legend6);
-            this.chCandleStick.Location = new System.Drawing.Point(18, 273);
+            chartArea1.Name = "ChartArea1";
+            this.chCandleStick.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chCandleStick.Legends.Add(legend1);
+            this.chCandleStick.Location = new System.Drawing.Point(12, 290);
             this.chCandleStick.Name = "chCandleStick";
-            series6.ChartArea = "ChartArea1";
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            this.chCandleStick.Series.Add(series6);
-            this.chCandleStick.Size = new System.Drawing.Size(854, 392);
-            this.chCandleStick.TabIndex = 5;
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chCandleStick.Series.Add(series1);
+            this.chCandleStick.Size = new System.Drawing.Size(876, 403);
+            this.chCandleStick.TabIndex = 6;
             this.chCandleStick.Text = "Chart";
             // 
-            // Form1
+            // StockifyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 677);
+            this.ClientSize = new System.Drawing.Size(900, 705);
             this.Controls.Add(this.chCandleStick);
             this.Controls.Add(this.lsvStock);
             this.Controls.Add(this.gbSearch);
-            this.Controls.Add(this.label1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "StockifyForm";
+            this.Text = "StockifyForm";
             this.gbSearch.ResumeLayout(false);
             this.gbLoadMethod.ResumeLayout(false);
             this.gbLoadMethod.PerformLayout();
@@ -329,13 +319,11 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chCandleStick)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox gbSearch;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Button btnClear;
@@ -356,7 +344,5 @@
         private System.Windows.Forms.Label lbCompanyName;
         private System.Windows.Forms.ListView lsvStock;
         private System.Windows.Forms.DataVisualization.Charting.Chart chCandleStick;
-
     }
 }
-
