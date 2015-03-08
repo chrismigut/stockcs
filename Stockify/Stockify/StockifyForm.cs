@@ -25,14 +25,18 @@ namespace Stockify
         public StockifyForm()
         {
             InitializeComponent();
-            DateTime dtEndDate = DateTime.Today.AddDays(-1);
+            DateTime dtEndDate = DateTime.Today;//.AddDays(-1);
             //init the dates
             Query.startDay = dtpStartDate.Value.Day.ToString();
-            Query.startMonth = dtpStartDate.Value.Month.ToString();
+            // yahoo's finance api requires months to start at zero instead of 1
+            // example (look at &a=00, &d=11): http://finance.yahoo.com/q/hp?s=AAPL&a=00&b=24&c=1990&d=11&e=16&f=2014&g=d
+            Query.startMonth = (dtpStartDate.Value.Month - 1).ToString();
             Query.startYear = dtpStartDate.Value.Year.ToString();
 
             Query.endDay = dtpEndDate.Value.Day.ToString();
-            Query.endMonth = dtpEndDate.Value.Month.ToString();
+            // yahoo's finance api requires months to start at zero instead of 1
+            // example (look at &a=00, &d=11): http://finance.yahoo.com/q/hp?s=AAPL&a=00&b=24&c=1990&d=11&e=16&f=2014&g=d
+            Query.endMonth = (dtpStartDate.Value.Month - 1).ToString();
             Query.endYear = dtpEndDate.Value.Year.ToString();
 
             // build grid
@@ -58,7 +62,9 @@ namespace Stockify
                 //Start Date
                 //User has selected a starting date
                 Query.startDay = dtpStartDate.Value.Day.ToString();
-                Query.startMonth = dtpStartDate.Value.Month.ToString();
+                // yahoo's finance api requires months to start at zero instead of 1
+                // example (look at &a=00, &d=11): http://finance.yahoo.com/q/hp?s=AAPL&a=00&b=24&c=1990&d=11&e=16&f=2014&g=d
+                Query.startMonth = (dtpStartDate.Value.Month - 1).ToString();
                 Query.startYear = dtpStartDate.Value.Year.ToString();
             }
             catch
@@ -77,7 +83,9 @@ namespace Stockify
                 //Ending Date
                 //User has selected a Ending date
                 Query.endDay = dtpEndDate.Value.Day.ToString();
-                Query.endMonth = dtpEndDate.Value.Month.ToString();
+                // yahoo's finance api requires months to start at zero instead of 1
+                // example (look at &a=00, &d=11): http://finance.yahoo.com/q/hp?s=AAPL&a=00&b=24&c=1990&d=11&e=16&f=2014&g=d
+                Query.endMonth = (dtpEndDate.Value.Month - 1).ToString();
                 Query.endYear = dtpEndDate.Value.Year.ToString();
             }
             catch
@@ -225,6 +233,9 @@ namespace Stockify
 
             // clear list view
             lsvStock.Items.Clear();
+
+            // clear chart
+            chCandleStick.Series["Candlestick"].Points.Clear();
         }
 
         /// <summary>
@@ -235,12 +246,12 @@ namespace Stockify
             try
             {
                 // errors with dates are coming from here (i believe) dates acting buggy
-                //check for end date is not less than start date
+                // check for end date is not less than start date
                 int checkDay = int.Parse(Query.endDay) - int.Parse(Query.startDay);
                 int checkMonth = int.Parse(Query.endMonth) - int.Parse(Query.startMonth);
                 int checkYear = int.Parse(Query.endYear) - int.Parse(Query.startYear);
 
-                if ((checkDay >= 0) && (checkMonth >= 0) && (checkYear >= 0))
+                if (/*(checkDay >= 0) && (checkMonth >= 0) &&*/ (checkYear >= 0))
                 {
                     //If date is valid, then continue
                     string filePath = "";
@@ -302,15 +313,14 @@ namespace Stockify
             foreach (string line in lines)
             {
                 string[] data = line.Split(',');
-
                 // add each element as a list view item (subitem)
-                ListViewItem element = new ListViewItem(data[0]);
-                element.SubItems.Add(data[1]);
-                element.SubItems.Add(data[2]);
-                element.SubItems.Add(data[3]);
-                element.SubItems.Add(data[4]);
-                element.SubItems.Add(data[5]);
-                element.SubItems.Add(data[6]);
+                ListViewItem element = new ListViewItem(data[0]);  //date
+                element.SubItems.Add(data[1]); //open
+                element.SubItems.Add(data[2]); //high
+                element.SubItems.Add(data[3]); //low
+                element.SubItems.Add(data[4]); //close
+                element.SubItems.Add(data[5]); //volume
+                element.SubItems.Add(data[6]); //adj close
 
                 // add list view items to list view (lsvStock)
                 lsvStock.Items.Add(element);
@@ -332,40 +342,60 @@ namespace Stockify
 
             List<string> stockData = new List<string>();
 
+            int cols = 0;
+
             // read each line in from filePath
             foreach (string line in lines)
             {
                 string[] data = line.Split(',');
-                stockData.Add(data[0]);
-                stockData.Add(data[1]);
-                stockData.Add(data[2]);
-                stockData.Add(data[3]);
-                stockData.Add(data[4]);
-                stockData.Add(data[5]);
-                stockData.Add(data[6]);
+                stockData.Add(data[0]); //date
+                stockData.Add(data[1]); //open
+                stockData.Add(data[2]); //high
+                stockData.Add(data[3]); //low
+                stockData.Add(data[4]); //close
+                stockData.Add(data[5]); //volume
+                stockData.Add(data[6]); //adj close
+                cols += 1;
             }
 
             // initialize series for Candlestick
-            Series price = new Series("Price");
-            chCandleStick.Series.Add(price);
+            Series candle = new Series("Candlestick");
+            chCandleStick.Series.Add(candle);
+            chCandleStick.Name = "Candlestick Chart";
 
             // Set series chart type
-            chCandleStick.Series["Price"].ChartType = SeriesChartType.Candlestick;
+            chCandleStick.Series["Candlestick"].ChartType = SeriesChartType.Candlestick;
 
             // Set the style of the open-close marks
-            chCandleStick.Series["Price"]["OpenCloseStyle"] = "Triangle";
+            chCandleStick.Series["Candlestick"]["OpenCloseStyle"] = "Triangle";
 
             // Show both open and close marks
-            chCandleStick.Series["Price"]["ShowOpenClose"] = "Both";
+            chCandleStick.Series["Candlestick"]["ShowOpenClose"] = "Both";
 
             // Set point width
-            chCandleStick.Series["Price"]["PointWidth"] = "1.0";
+            chCandleStick.Series["Candlestick"]["PointWidth"] = "1.0";
 
             // Set colors bars
-            chCandleStick.Series["Price"]["PriceUpColor"] = "Green";
-            chCandleStick.Series["Price"]["PriceDownColor"] = "Red";
+            chCandleStick.Series["Candlestick"]["PriceUpColor"] = "Green";
+            chCandleStick.Series["Candlestick"]["PriceDownColor"] = "Red";
 
-            // do something with data
+            int rows = 7;
+
+            // do something with data (need to figure out data structure)
+            /*
+            for (int i = 0; i < cols; i++ )
+                for (int j = 0; j < rows; j++)
+                {
+                    // adding date and high
+                    chCandleStick.Series["price"].Points.AddXY(DateTime.Parse(stockData[i][j]), stockData[i][j]);
+                    // adding low
+                    chCandleStick.Series["price"].Points[i].YValues[1] = stockData[i][j];
+                    //adding open
+                    chCandleStick.Series["price"].Points[i].YValues[2] = stockData[i][j];
+                    // adding close
+                    chCandleStick.Series["price"].Points[i].YValues[3] = stockData[i][j];
+                }
+             */
         }
 
         /// <summary>
@@ -375,7 +405,8 @@ namespace Stockify
         {
             // save png file to DEV folder
             // weird error with .net jit ??
-            chCandleStick.SaveImage("C:\\DEV\\chart_" + DateTime.Now + ".png", ChartImageFormat.Png);
+            //string date = DateTime.Now.ToString("HH:mm:ss");
+            chCandleStick.SaveImage("C:\\DEV\\chart.png", ChartImageFormat.Png);
         }
     }
 }
