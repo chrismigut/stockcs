@@ -46,10 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Code\Company.cs" />
     <Compile Include="HelperClasses\CustomFileHander.cs" />
     <Compile Include="HelperClasses\SearchQuery.cs" />
-    <Compile Include="HelperFunctions\ParseFile.cs" />
     <Compile Include="HelperFunctions\Queries.cs" />
     <Compile Include="HelperFunctions\QueryAssembly.cs" />
     <Compile Include="Program.cs" />

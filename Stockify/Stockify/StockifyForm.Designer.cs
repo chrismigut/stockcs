@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.gbSearch = new System.Windows.Forms.GroupBox();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -208,7 +207,7 @@
             this.dtpEndDate.Location = new System.Drawing.Point(91, 54);
             this.dtpEndDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpEndDate.MaxDate = new System.DateTime(2015, 3, 3, 0, 0, 0, 0);
-            this.dtpEndDate.MinDate = new System.DateTime(1990, 1, 2, 0, 0, 0, 0);
+            this.dtpEndDate.MinDate = new System.DateTime(1990, 1, 1, 0, 0, 0, 0);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(160, 22);
             this.dtpEndDate.TabIndex = 3;
@@ -285,16 +284,13 @@
             // 
             // chCandleStick
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chCandleStick.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chCandleStick.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chCandleStick.ChartAreas.Add(chartArea3);
             this.chCandleStick.Location = new System.Drawing.Point(129, 290);
             this.chCandleStick.Name = "chCandleStick";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chCandleStick.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Name = "Series1";
+            this.chCandleStick.Series.Add(series3);
             this.chCandleStick.Size = new System.Drawing.Size(759, 403);
             this.chCandleStick.TabIndex = 6;
             this.chCandleStick.Text = "Chart";
