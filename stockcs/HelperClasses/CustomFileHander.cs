@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Stockify.HelperFunctions;
+using stockcs.HelperFunctions;
 
-namespace Stockify.HelperClasses
+namespace stockcs.HelperClasses
 {
     class CustomFileHander
     {

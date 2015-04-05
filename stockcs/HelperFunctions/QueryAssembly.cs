@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Stockify.HelperClasses;
+using stockcs.HelperClasses;
 
-namespace Stockify.HelperFunctions
+namespace stockcs.HelperFunctions
 {
 
     /// <summary>

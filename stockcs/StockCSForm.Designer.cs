@@ -1,6 +1,6 @@
-﻿namespace Stockify
+﻿namespace stockcs
 {
-    partial class StockifyForm
+    partial class StockCSForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            this.lsvStock = new System.Windows.Forms.ListView();
             this.gbSearch = new System.Windows.Forms.GroupBox();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -46,18 +45,24 @@
             this.lblEndDate = new System.Windows.Forms.Label();
             this.lblStartDate = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtCompanyTicker = new System.Windows.Forms.TextBox();
+            this.cbCompanyTicker = new System.Windows.Forms.ComboBox();
             this.lbCompanyName = new System.Windows.Forms.Label();
-            this.lsvStock = new System.Windows.Forms.ListView();
-            this.chCandleStick = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.btSaveImageOfChart = new System.Windows.Forms.Button();
             this.gbSearch.SuspendLayout();
             this.gbLoadMethod.SuspendLayout();
             this.gbResolution.SuspendLayout();
             this.gbDatePicker.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chCandleStick)).BeginInit();
             this.SuspendLayout();
+            // 
+            // lsvStock
+            // 
+            this.lsvStock.Location = new System.Drawing.Point(386, 11);
+            this.lsvStock.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lsvStock.Name = "lsvStock";
+            this.lsvStock.Size = new System.Drawing.Size(507, 263);
+            this.lsvStock.TabIndex = 11;
+            this.lsvStock.UseCompatibleStateImageBehavior = false;
+            this.lsvStock.Visible = false;
             // 
             // gbSearch
             // 
@@ -67,12 +72,12 @@
             this.gbSearch.Controls.Add(this.gbResolution);
             this.gbSearch.Controls.Add(this.gbDatePicker);
             this.gbSearch.Controls.Add(this.panel1);
-            this.gbSearch.Location = new System.Drawing.Point(12, 11);
+            this.gbSearch.Location = new System.Drawing.Point(16, 11);
             this.gbSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbSearch.Name = "gbSearch";
             this.gbSearch.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gbSearch.Size = new System.Drawing.Size(351, 263);
-            this.gbSearch.TabIndex = 3;
+            this.gbSearch.TabIndex = 10;
             this.gbSearch.TabStop = false;
             this.gbSearch.Text = "Search";
             // 
@@ -96,6 +101,7 @@
             this.btnClear.TabIndex = 6;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Visible = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // gbLoadMethod
@@ -110,6 +116,7 @@
             this.gbLoadMethod.TabIndex = 5;
             this.gbLoadMethod.TabStop = false;
             this.gbLoadMethod.Text = "Load Method";
+            this.gbLoadMethod.Visible = false;
             // 
             // rbDisplay
             // 
@@ -148,6 +155,7 @@
             this.gbResolution.TabIndex = 4;
             this.gbResolution.TabStop = false;
             this.gbResolution.Text = "Resolution";
+            this.gbResolution.Visible = false;
             // 
             // rbMonthly
             // 
@@ -199,6 +207,7 @@
             this.gbDatePicker.TabIndex = 3;
             this.gbDatePicker.TabStop = false;
             this.gbDatePicker.Text = "Select Time Frame";
+            this.gbDatePicker.Visible = false;
             // 
             // dtpEndDate
             // 
@@ -248,7 +257,7 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.txtCompanyTicker);
+            this.panel1.Controls.Add(this.cbCompanyTicker);
             this.panel1.Controls.Add(this.lbCompanyName);
             this.panel1.Location = new System.Drawing.Point(5, 20);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -256,13 +265,15 @@
             this.panel1.Size = new System.Drawing.Size(260, 31);
             this.panel1.TabIndex = 2;
             // 
-            // txtCompanyTicker
+            // cbCompanyTicker
             // 
-            this.txtCompanyTicker.Location = new System.Drawing.Point(125, 5);
-            this.txtCompanyTicker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtCompanyTicker.Name = "txtCompanyTicker";
-            this.txtCompanyTicker.Size = new System.Drawing.Size(127, 22);
-            this.txtCompanyTicker.TabIndex = 1;
+            this.cbCompanyTicker.FormattingEnabled = true;
+            this.cbCompanyTicker.Location = new System.Drawing.Point(119, 5);
+            this.cbCompanyTicker.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbCompanyTicker.Name = "cbCompanyTicker";
+            this.cbCompanyTicker.Size = new System.Drawing.Size(132, 24);
+            this.cbCompanyTicker.TabIndex = 1;
+            this.cbCompanyTicker.SelectedIndexChanged += new System.EventHandler(this.cbCompanyTicker_SelectedIndexChanged);
             // 
             // lbCompanyName
             // 
@@ -273,49 +284,15 @@
             this.lbCompanyName.TabIndex = 0;
             this.lbCompanyName.Text = "Company Ticker: ";
             // 
-            // lsvStock
-            // 
-            this.lsvStock.Location = new System.Drawing.Point(382, 11);
-            this.lsvStock.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.lsvStock.Name = "lsvStock";
-            this.lsvStock.Size = new System.Drawing.Size(507, 263);
-            this.lsvStock.TabIndex = 5;
-            this.lsvStock.UseCompatibleStateImageBehavior = false;
-            // 
-            // chCandleStick
-            // 
-            chartArea3.Name = "ChartArea1";
-            this.chCandleStick.ChartAreas.Add(chartArea3);
-            this.chCandleStick.Location = new System.Drawing.Point(129, 290);
-            this.chCandleStick.Name = "chCandleStick";
-            series3.ChartArea = "ChartArea1";
-            series3.Name = "Series1";
-            this.chCandleStick.Series.Add(series3);
-            this.chCandleStick.Size = new System.Drawing.Size(759, 403);
-            this.chCandleStick.TabIndex = 6;
-            this.chCandleStick.Text = "Chart";
-            // 
-            // btSaveImageOfChart
-            // 
-            this.btSaveImageOfChart.Location = new System.Drawing.Point(18, 290);
-            this.btSaveImageOfChart.Name = "btSaveImageOfChart";
-            this.btSaveImageOfChart.Size = new System.Drawing.Size(95, 43);
-            this.btSaveImageOfChart.TabIndex = 7;
-            this.btSaveImageOfChart.Text = "Save Image";
-            this.btSaveImageOfChart.UseVisualStyleBackColor = true;
-            this.btSaveImageOfChart.Click += new System.EventHandler(this.btSaveImageOfChart_Click);
-            // 
-            // StockifyForm
+            // StockCSForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 705);
-            this.Controls.Add(this.btSaveImageOfChart);
-            this.Controls.Add(this.chCandleStick);
+            this.ClientSize = new System.Drawing.Size(904, 285);
             this.Controls.Add(this.lsvStock);
             this.Controls.Add(this.gbSearch);
-            this.Name = "StockifyForm";
-            this.Text = "StockifyForm";
+            this.Name = "StockCSForm";
+            this.Text = "StockCSForm";
             this.gbSearch.ResumeLayout(false);
             this.gbLoadMethod.ResumeLayout(false);
             this.gbLoadMethod.PerformLayout();
@@ -325,13 +302,13 @@
             this.gbDatePicker.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chCandleStick)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.ListView lsvStock;
         private System.Windows.Forms.GroupBox gbSearch;
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.Button btnClear;
@@ -348,10 +325,7 @@
         private System.Windows.Forms.Label lblEndDate;
         private System.Windows.Forms.Label lblStartDate;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox txtCompanyTicker;
+        private System.Windows.Forms.ComboBox cbCompanyTicker;
         private System.Windows.Forms.Label lbCompanyName;
-        private System.Windows.Forms.ListView lsvStock;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chCandleStick;
-        private System.Windows.Forms.Button btSaveImageOfChart;
     }
 }

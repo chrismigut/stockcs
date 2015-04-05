@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 
-namespace Stockify.HelperFunctions
+namespace stockcs.HelperFunctions
 {
     /// <summary>
     /// Queries to pull information from the Yahoo API

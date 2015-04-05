@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Stockify
+namespace stockcs
 {
     static class Program
     {
@@ -16,7 +16,7 @@ namespace Stockify
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StockifyForm());
+            Application.Run(new StockCSForm());
         }
     }
 }

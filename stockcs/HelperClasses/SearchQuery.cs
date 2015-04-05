@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Stockify.HelperClasses
+namespace stockcs.HelperClasses
 {
     /// <summary>
     /// SearchQuery will hold the results the user wants relating to company information.

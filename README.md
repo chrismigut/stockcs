@@ -1,6 +1,7 @@
-# Stockify
-windows forms based stock market graph app
+# stockcs
+build candlestick charts using the Yahoo Finance API and Windows Forms
 
-## Screenshot
+## Screenshots
 
 ![screenshot](/screenshots/1.png)
+![screenshot](/screenshots/2.png)
