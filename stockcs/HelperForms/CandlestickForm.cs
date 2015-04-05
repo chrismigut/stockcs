@@ -25,7 +25,7 @@ namespace stockcs.HelperForms
             txtStartDate.Text = startDate.ToShortDateString();
             txtEndDate.Text = endDate.ToShortDateString();
             tickerValue = ticker;
-            this.Text = ticker + ", " + resolution + ", " + startDate.ToShortDateString() + "-" + endDate.ToShortDateString();
+            this.Text = ticker + ", " + resolution + ", " + startDate.ToShortDateString() + " - " + endDate.ToShortDateString();
         }
         private void populateChart(List<aCandlestick> candlestick)
         {
